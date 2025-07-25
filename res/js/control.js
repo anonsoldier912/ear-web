@@ -86,6 +86,8 @@ function getModelFromSKU(SKU, altList = false) {
         "11300001": "elekid_black",
         "11300002": "elekid_black",
         "11300003": "elekid_black",
+        "11300004": "elekid_white",
+        "11300005": "elekid_white",
         "11300006": "elekid_white",
     }
 
