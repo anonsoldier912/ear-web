@@ -387,6 +387,7 @@ function getModelFromSKU(SKU, altList = false) {
             "98": "girafarig_black",
             "99": "girafarig_green",
             "00": "girafarig_orange",
+            "01": "girafarig_green",
             "03": "gligar_blue",
             "05": "gligar_white",
         };
