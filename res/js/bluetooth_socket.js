@@ -56,7 +56,7 @@ async function send(command, payload = [], operation = "") {
             console.error('Write failed:', error);
         } finally {
             if (writer) {
-                writer.close();
+                await writer.close();
             }
         }
     });
