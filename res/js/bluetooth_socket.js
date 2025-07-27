@@ -49,14 +49,14 @@ async function send(command, payload = [], operation = "") {
     writeQueue = writeQueue.then(async () => {
         let writer = null;
         try {
-            writer = SPPsocket.writable.getWriter();
+            writer = await SPPsocket.writable.getWriter();
             console.log("Writing to SPPsocket: " + byteArray.map(byte => byte.toString(16).padStart(2, '0')).join(''));
             await writer.write(new Uint8Array(byteArray));
         } catch (error) {
             console.error('Write failed:', error);
         } finally {
             if (writer) {
-                writer.releaseLock();
+                writer.close();
             }
         }
     });
@@ -120,7 +120,7 @@ async function connectSPP(sppPort=null) {
     if (sppPort) {
         console.log('connected to a Bluetooth Serial Port Profile port', sppPort.getInfo());
 
-        await sppPort.open({ baudRate: 9600 });
+        await sppPort.open({ baudRate: 9600, bufferSize: 2048 });
         //on disconnect serial
         setModelBase();
         SPPsocket = sppPort;
