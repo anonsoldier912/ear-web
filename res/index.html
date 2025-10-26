@@ -120,8 +120,8 @@
 <body style="width: 80%; height: 710px; position: absolute; background: #21201f;  left: 50%; -ms-transform: translate(-50%, 0); transform: translate(-50%, 0); color:white;">
 
     <div id="announcement-banner">
-        <div id="announcement-date">2025-07-22</div>
-        <div id="announcement-content">Headphone (1) and Buds 2 and Buds 2 Plus are now supported</div>
+        <div id="announcement-date">2025-10-26</div>
+        <div id="announcement-content">Buds 2a are now supported</div>
     </div>
 
     <div id="logo_container">
@@ -151,6 +151,7 @@
                 - Nothing Ear (a)<br />
                 - CMF Buds Pro 2<br />
                 - Nothing Ear (open)<br />
+                - CMF Buds 2a<br />
                 - CMF Buds 2<br />
                 - CMF Buds 2 Plus<br />
                 - Nothing Headphone (1)<br />
@@ -178,8 +179,6 @@
             const bannerDate = new Date(dateBanner.innerHTML);
             const currentDate = new Date();
             const diffInDays = (currentDate - bannerDate) / (1000 * 60 * 60 * 24);
-
-            console.log(diffInDays);    
             if (diffInDays <= 7) {
                 banner.style.display = 'inline-block';
             }
