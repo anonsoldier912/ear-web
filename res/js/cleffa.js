@@ -416,7 +416,7 @@ function changeGesture(type) {
         })
     } else if (type == "triple") {
         var show_popup = "";
-        for (var i = 0; i < double_pinch.length; i++) {
+        for (var i = 0; i < triple_pinch.length; i++) {
             show_popup += `
             <option id="${triple_pinch[i]}" ${current_side == "l" ? left_triple_pinch_current == triple_pinch[i] ? "selected" : "" : right_triple_pinch_current == triple_pinch[i] ? "selected" : ""}>
                 ${triple_pinch[i]}
