@@ -22,77 +22,10 @@ function updateBattery(leftText, caseText, rightText) {
     batteryRight.innerText = rightText;
 }
 
-function getModelFromSKU(SKU, altList = false) {
-    var sku_to_model = {
-        "01": "ear_1_white",
-        "02": "ear_1_black",
-        "03": "ear_1_white",
-        "04": "ear_1_black",
-        "06": "ear_1_black",
-        "07": "ear_1_white",
-        "08": "ear_1_black",
-        "10": "ear_1_black",
-        "14": "ear_stick",
-        "15": "ear_stick",
-        "16": "ear_stick",
-        "17": "ear_2_white",
-        "18": "ear_2_white",
-        "19": "ear_2_white",
-        "27": "ear_2_black",
-        "28": "ear_2_black",
-        "29": "ear_2_black",
-        "30": "corsola_black",
-        "31": "corsola_black",
-        "32": "corsola_white",
-        "33": "corsola_white",
-        "34": "corsola_orange",
-        "35": "corsola_orange",
-        "48": "crobat_orange",
-        "49": "crobat_white",
-        "50": "crobat_black",
-        "51": "crobat_black",
-        "52": "crobat_white",
-        "53": "crobat_orange",
-        "54": "donphan_black",
-        "55": "donphan_black",
-        "56": "donphan_white",
-        "57": "donphan_white",
-        "58": "donphan_orange",
-        "59": "donphan_orange",
-        "61": "entei_black",
-        "62": "entei_white",
-        "63": "cleffa_black",
-        "64": "cleffa_white",
-        "65": "cleffa_yellow",
-        "66": "cleffa_black",
-        "67": "cleffa_white",
-        "68": "cleffa_yellow",
-        "69": "entei_black",
-        "70": "entei_white",
-        "71": "cleffa_black",
-        "72": "cleffa_white",
-        "73": "cleffa_yellow",
-        "74": "entei_black",
-        "75": "entei_white",
-        "76": "espeon_black",
-        "77": "espeon_white",
-        "78": "espeon_orange",
-        "79": "espeon_blue",
-        "80": "espeon_blue",
-        "81": "espeon_orange",
-        "82": "espeon_white",
-        "83": "espeon_black",
-        "11200005": "flaaffy_white",
-        "11300001": "elekid_black",
-        "11300002": "elekid_black",
-        "11300003": "elekid_black",
-        "11300004": "elekid_white",
-        "11300005": "elekid_white",
-        "11300006": "elekid_white",
-    }
+function getModelFromFastpair(fastpairID) {
 
     var models = {
-        "ear_1_white": {
+        "31D53D": {
             name: "Nothing Ear (1)",
             base: "B181",
             leftImg: "../assets/ear_one_white_left.webp",
@@ -101,7 +34,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "../assets/ear_one_white_duo.webp",
             isANC: true
         },
-        "ear_1_black": {
+        "624011": {
             name: "Nothing Ear (1)",
             base: "B181",
             leftImg: "../assets/ear_one_black_left.webp",
@@ -110,7 +43,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "../assets/ear_one_black_duo.webp",
             isANC: true
         },
-        "ear_stick": {
+        "1016DD": {
             name: "Nothing Ear (stick)",
             base: "B157",
             leftImg: "../assets/ear_stick_left.webp",
@@ -119,7 +52,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "../assets/ear_stick_white_duo.webp",
             isANC: false
         },
-        "ear_2_white": {
+        "DEE8C0": {
             name: "Nothing Ear (2)",
             base: "B155",
             leftImg: "../assets/ear_two_white_left.webp",
@@ -128,7 +61,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "../assets/ear_two_white_duo.webp",
             isANC: true
         },
-        "ear_2_black": {
+        "ACC520": {
             name: "Nothing Ear (2)",
             base: "B155",
             leftImg: "../assets/ear_two_black_left.webp",
@@ -137,7 +70,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "../assets/ear_two_black_duo.webp",
             isANC: true
         },
-        "corsola_orange": {
+        "5F8F82": {
             name: "CMF Buds Pro",
             base: "B163",
             leftImg: "../assets/ear_corsola_orange_left.webp",
@@ -146,7 +79,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "corsola_black": {
+        "ADD2C4": {
             name: "CMF Buds Pro",
             base: "B163",
             leftImg: "../assets/ear_corsola_black_left.webp",
@@ -155,7 +88,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "corsola_white": {
+        "2EB1CA": {
             name: "CMF Buds Pro",
             base: "B163",
             leftImg: "../assets/ear_corsola_white_left.webp",
@@ -164,7 +97,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "entei_black": {
+        "A20444": {
             name: "Nothing Ear",
             base: "B171",
             leftImg: "../assets/ear_twos_black_left.webp",
@@ -173,7 +106,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "entei_white": {
+        "FEB1C7": {
             name: "Nothing Ear",
             base: "B171",
             leftImg: "../assets/ear_twos_white_left.webp",
@@ -182,7 +115,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "cleffa_black": {
+        "03464E": {
             name: "Nothing Ear (a)",
             base: "B162",
             leftImg: "../assets/ear_color_black_left.webp",
@@ -191,7 +124,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "cleffa_white": {
+        "5E3FBC": {
             name: "Nothing Ear (a)",
             base: "B162",
             leftImg: "../assets/ear_color_white_left.webp",
@@ -200,7 +133,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "cleffa_yellow": {
+        "8B6380": {
             name: "Nothing Ear (a)",
             base: "B162",
             leftImg: "../assets/ear_color_yellow_left.webp",
@@ -209,7 +142,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "crobat_orange": {
+        "4DFC4A": {
             name: "CMF Neckband Pro",
             base: "B164",
             leftImg: "",
@@ -218,7 +151,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "../assets/crobat_orange.webp",
             isANC: true
         },
-        "crobat_white": {
+        "26C190": {
             name: "CMF Neckband Pro",
             base: "B164",
             leftImg: "",
@@ -227,7 +160,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "../assets/crobat_white.webp",
             isANC: true
         },
-        "crobat_black": {
+        "AE35FD": {
             name: "CMF Neckband Pro",
             base: "B164",
             leftImg: "",
@@ -236,7 +169,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "../assets/crobat_black.webp",
             isANC: true
         },
-        "donphan_black": {
+        "150A27": {
             name: "CMF Buds",
             base: "B168",
             leftImg: "../assets/donphan_black_left.webp",
@@ -245,7 +178,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "donphan_white": {
+        "ACCE54": {
             name: "CMF Buds",
             base: "B168",
             leftImg: "../assets/donphan_white_left.webp",
@@ -254,7 +187,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "donphan_orange": {
+        "D35E18": {
             name: "CMF Buds",
             base: "B168",
             leftImg: "../assets/donphan_orange_left.webp",
@@ -263,7 +196,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "espeon_black": {
+        "F29566": {
             name: "CMF Buds Pro 2",
             base: "B172",
             leftImg: "../assets/espeon_black_left.webp",
@@ -272,7 +205,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "espeon_white": {
+        "CA36A6": {
             name: "CMF Buds Pro 2",
             base: "B172",
             leftImg: "../assets/espeon_white_left.webp",
@@ -281,7 +214,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "espeon_orange": {
+        "A7B220": {
             name: "CMF Buds Pro 2",
             base: "B172",
             leftImg: "../assets/espeon_orange_left.webp",
@@ -290,7 +223,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "espeon_blue": {
+        "2B353E": {
             name: "CMF Buds Pro 2",
             base: "B172",
             leftImg: "../assets/espeon_blue_left.webp",
@@ -299,7 +232,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "flaaffy_white": {
+        "FC3AAF": {
             name: "Nothing Ear (open)",
             base: "B174",
             leftImg: "../assets/flaffy_white_left.webp",
@@ -308,7 +241,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: false
         },
-        "gligar_white": {
+        "4AEB6E": {
             name: "CMF Buds 2 Plus",
             base: "B184",
             leftImg: "../assets/b184_white_left.webp",
@@ -317,7 +250,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "gligar_blue": {
+        "5C587F": {
             name: "CMF Buds 2 Plus",
             base: "B184",
             leftImg: "../assets/b184_blue_left.webp",
@@ -326,7 +259,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "girafarig_black": {
+        "19EF24": {
             name: "CMF Buds 2",
             base: "B179",
             leftImg: "../assets/b179_black_left.webp",
@@ -335,7 +268,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "girafarig_green": {
+        "FF2AB0": {
             name: "CMF Buds 2",
             base: "B179",
             leftImg: "../assets/b179_green_left.webp",
@@ -344,7 +277,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "girafarig_orange": {
+        "D9AB5D": {
             name: "CMF Buds 2",
             base: "B179",
             leftImg: "../assets/b179_orange_left.webp",
@@ -353,7 +286,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "hoothoot_black": {
+        "70F8E3": {
             name: "CMF Buds 2a",
             base: "B185",
             leftImg: "../assets/b185_black_left.webp",
@@ -362,7 +295,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "hoothoot_white": {
+        "ED5412": {
             name: "CMF Buds 2a",
             base: "B185",
             leftImg: "../assets/b185_white_left.webp",
@@ -371,7 +304,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "hoothoot_orange": {
+        "509CAE": {
             name: "CMF Buds 2a",
             base: "B185",
             leftImg: "../assets/b185_orange_left.webp",
@@ -380,7 +313,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "elekid_black": {
+        "C19ECD": {
             name: "Nothing Headphone (1)",
             base: "B170",
             leftImg: "../assets/b170_black_left.webp",
@@ -389,7 +322,7 @@ function getModelFromSKU(SKU, altList = false) {
             duoImg: "",
             isANC: true
         },
-        "elekid_white": {
+        "2D6FDA": {
             name: "Nothing Headphone (1)",
             base: "B170",
             leftImg: "../assets/b170_grey_left.webp",
@@ -397,48 +330,80 @@ function getModelFromSKU(SKU, altList = false) {
             rightImg: "",
             duoImg: "",
             isANC: true
-        }
+        },
+        "C34F3B": {
+            name: "Nothing Ear (a)",
+            base: "B162",
+            altBase: "B183",
+            leftImg: "../assets/ear_color_black_left.webp",
+            caseImg: "../assets/ear_color_black_case.webp",
+            rightImg: "../assets/ear_color_black_right.webp",
+            duoImg: "",
+            isANC: true
+        },
+        "404D6D": {
+            name: "Nothing Ear (a)",
+            base: "B162",
+            altBase: "B183",
+            leftImg: "../assets/ear_color_white_left.webp",
+            caseImg: "../assets/ear_color_white_case.webp",
+            rightImg: "../assets/ear_color_white_right.webp",
+            duoImg: "",
+            isANC: true
+        },
+        "839E9A": {
+            name: "Nothing Ear (a)",
+            base: "B162",
+            altBase: "B183",
+            leftImg: "../assets/ear_color_yellow_left.webp",
+            caseImg: "../assets/ear_color_yellow_case.webp",
+            rightImg: "../assets/ear_color_yellow_right.webp",
+            duoImg: "",
+            isANC: true
+        },
+        "2F45F5": {
+            name: "CMF Buds Pro 2",
+            base: "B172",
+            altBase: "B187",
+            leftImg: "../assets/espeon_black_left.webp",
+            caseImg: "../assets/espeon_black_case.webp",
+            rightImg: "../assets/espeon_black_right.webp",
+            duoImg: "",
+            isANC: true
+        },
+        "E1BE45": {
+            name: "CMF Buds Pro 2",
+            base: "B172",
+            altBase: "B187",
+            leftImg: "../assets/espeon_white_left.webp",
+            caseImg: "../assets/espeon_white_case.webp",
+            rightImg: "../assets/espeon_white_right.webp",
+            duoImg: "",
+            isANC: true
+        },
+        "1253C0": {
+            name: "CMF Buds Pro 2",
+            base: "B172",
+            altBase: "B187",
+            leftImg: "../assets/espeon_orange_left.webp",
+            caseImg: "../assets/espeon_orange_case.webp",
+            rightImg: "../assets/espeon_orange_right.webp",
+            duoImg: "",
+            isANC: true
+        },
+        "0F1A4F": {
+            name: "CMF Buds Pro 2",
+            base: "B172",
+            altBase: "B187",
+            leftImg: "../assets/espeon_blue_left.webp",
+            caseImg: "../assets/espeon_blue_case.webp",
+            rightImg: "../assets/espeon_blue_right.webp",
+            duoImg: "",
+            isANC: true
+        },
     };
-    if (altList) {
-        sku_to_model_new = {
-            "76": "espeon_black",
-            "77": "espeon_white",
-            "78": "espeon_orange",
-            "79": "espeon_blue",
-            "80": "espeon_blue",
-            "81": "espeon_orange",
-            "82": "espeon_white",
-            "83": "espeon_black",
-            "16": "espeon_white",
-            "17": "espeon_black",
-            "18": "espeon_orange",
-            "19": "espeon_blue",
-            "96": "girafarig_orange",
-            "97": "girafarig_black",
-            "98": "girafarig_black",
-            "99": "girafarig_green",
-            "00": "girafarig_orange",
-            "01": "girafarig_green",
-            "02": "gligar_blue",
-            "03": "gligar_blue",
-            "04": "gligar_white",
-            "05": "gligar_white",
-            "06": "hoothoot_black",
-            "07": "hoothoot_black",
-            "08": "hoothoot_white",
-            "09": "hoothoot_white",
-            "10": "hoothoot_orange",
-            "11": "hoothoot_orange",
-        };
-    }
-    model = sku_to_model[SKU];
-    if (altList) {
-        model = sku_to_model_new[SKU];
-        if (!model) {
-            model = sku_to_model[SKU];
-        }
-    }
-    return models[model];
+
+    return models[fastpairID];
 }
 
 function getImageForModel(modelID) {
@@ -488,91 +453,6 @@ async function updateBudsInfo(imageOnly=false, isHeadphone=false) {
     }
 }
 
-function getModelInfo(modelID) {
-    var models = {
-        "31d53d": {
-            name: "Nothing Ear (1)",
-            leftImg: "../assets/ear_one_white_left.webp",
-            caseImg: "../assets/ear_one_white_case.webp",
-            rightImg: "../assets/ear_one_white_right.webp",
-            duoImg: "../assets/ear_one_white_duo.webp",
-            isANC: true
-        },
-        "624011": {
-            name: "Nothing Ear (1)",
-            leftImg: "../assets/ear_one_black_left.webp",
-            caseImg: "../assets/ear_one_black_case.webp",
-            rightImg: "../assets/ear_one_black_right.webp",
-            duoImg: "../assets/ear_one_black_duo.webp",
-            isANC: true
-        },
-        "1016dd": {
-            name: "Nothing Ear (stick)",
-            leftImg: "../assets/ear_stick_left.webp",
-            caseImg: "../assets/ear_stick_case_none.webp",
-            rightImg: "../assets/ear_stick_right.webp",
-            duoImg: "../assets/ear_stick_white_duo.webp",
-            isANC: false
-        },
-        "dee8c0": {
-            name: "Nothing Ear (2)",
-            leftImg: "../assets/ear_two_white_left.webp",
-            caseImg: "../assets/ear_two_white_case.webp",
-            rightImg: "../assets/ear_two_white_right.webp",
-            duoImg: "../assets/ear_two_white_duo.webp",
-            isANC: true
-        },
-        "acc520": {
-            name: "Nothing Ear (2)",
-            leftImg: "../assets/ear_two_black_left.webp",
-            caseImg: "../assets/ear_two_black_case.webp",
-            rightImg: "../assets/ear_two_black_right.webp",
-            duoImg: "../assets/ear_two_black_duo.webp",
-            isANC: true
-        },
-        "5f8f82": {
-            name: "CMF Buds Pro",
-            leftImg: "../assets/ear_corsola_orange_left.webp",
-            caseImg: "../assets/ear_corsola_orange_case.webp",
-            rightImg: "../assets/ear_corsola_orange_right.webp",
-            duoImg: "",
-            isANC: true
-        },
-        "add2c4": {
-            name: "CMF Buds Pro",
-            leftImg: "../assets/ear_corsola_black_left.webp",
-            caseImg: "../assets/ear_corsola_black_case.webp",
-            rightImg: "../assets/ear_corsola_black_right.webp",
-            duoImg: "",
-            isANC: true
-        },
-        "2eb1ca": {
-            name: "CMF Buds Pro",
-            leftImg: "../assets/ear_corsola_white_left.webp",
-            caseImg: "../assets/ear_corsola_white_case.webp",
-            rightImg: "../assets/ear_corsola_white_right.webp",
-            duoImg: "",
-            isANC: true
-        },
-        "a20444": {
-            name: "Nothing Ear",
-            leftImg: "../assets/ear_twos_black_left.webp",
-            caseImg: "../assets/ear_twos_black_case.webp",
-            rightImg: "../assets/ear_twos_black_right.webp",
-            duoImg: "",
-            isANC: true
-        },
-        "feb1c7": {
-            name: "Nothing Ear",
-            leftImg: "../assets/ear_twos_white_left.webp",
-            caseImg: "../assets/ear_twos_white_case.webp",
-            rightImg: "../assets/ear_twos_white_right.webp",
-            duoImg: "",
-            isANC: true
-        }
-    };
-    return models[modelID];
-}
 
 function getDevicesForList(devices) {
     var list = document.querySelector("#device_container");

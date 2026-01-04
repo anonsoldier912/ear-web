@@ -12,8 +12,7 @@ let firmwareConfig = {};
 let operationID = 0;
 let operationList = {};
 
-
-let debug = false;
+let debug = new URLSearchParams(window.location.search).get("debug");
 if (!debug) {
     console.log = function () { };
 }

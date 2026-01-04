@@ -287,84 +287,60 @@ function forceModelForDemo(sku, isAltList = false) {
     }
 }
 
+async function scanNewDevicesFastpair() {
+	const SPP_UUID = "aeac4a03-dff5-498f-843a-34487cf133eb";
+	const FASTPAIR_UUID = "df21fe2c-2515-4fdb-8886-f12c4d67927c";
+	forgetAllDevices();
+	try {
+		sppPort = await navigator.serial.requestPort({
+			allowedBluetoothServiceClassIds: [SPP_UUID, FASTPAIR_UUID],
+			filters: [{ bluetoothServiceClassId: FASTPAIR_UUID }],
+		});
+	}
+	catch (error) {
+		console.error('Connection failed', error);
+		document.getElementById("scan_button-c").innerText = "Device not selected";
+		setTimeout(function () {
+			window.location.reload();
+		}, 3000);
+		return;
+	}
 
-async function scanNewDevicesSerial() {
-    const SPP_UUID = "aeac4a03-dff5-498f-843a-34487cf133eb";
-    const FASTPAIR_UUID = "df21fe2c-2515-4fdb-8886-f12c4d67927c";
-    try {
-        sppPort = await navigator.serial.requestPort({
-            allowedBluetoothServiceClassIds: [SPP_UUID],
-            filters: [{ bluetoothServiceClassId: SPP_UUID }],
-        });
-    }
-    catch (error) {
-        console.error('Connection failed', error);
-        document.getElementById("device_container").innerHTML = '<div class="device-info"><p>Device not selected</p></div>';
-        setTimeout(function () {
-            window.location.reload();
-        }, 3000);
-        return;
-    }
-
-
-
-    if (sppPort) {
-        console.log('connected to a Bluetooth Serial Port Profile port', sppPort.getInfo());
-        //print mac address of the connected device
-        console.log(sppPort);
-        await sppPort.open({ baudRate: 9600 });
-        //store sppPort in local storage
-        localStorage.setItem("sppPort", sppPort);
-        SPPsocket = sppPort;
-        //read from the serial port
-        const reader = sppPort.readable.getReader();
-        requestSerialNumber();
-        while (true) {
-            const { value, done } = await reader.read();
-            //console.log(value);
-            //print hex string of the received data
-            var string = "";
-            for (let i = 0; i < value.length; i++) {
-                //fill the string with leading zero if needed
-                string += (value[i] < 16 ? "0" : "") + value[i].toString(16);
-            }
-            let rawData = new Uint8Array(value.buffer);
-            //check if first byte is 0x55, else continue
-            if (rawData[0] !== 85 || rawData.length < 10) {
-                continue;
-            }
-            //header is 8 bytes long
-            let header = rawData.slice(0, 6);
-            let command = getCommand(header);
-            console.log(command);
-            //print rawData hex string
-            console.log(string);
-            if (command === 16390) {
-                let serialNum = getSerialNumber(rawData.reduce((acc, byte) => acc + byte.toString(16).padStart(2, '0'), ''));
-                console.log(serialNum);
-                processSerial(serialNum);
-                //document.getElementById("device_container").innerHTML = '<div class="flex flex-col items-center justify-center"><p class="text-center text-lg font-bold">Device Found</p><p class="text-center text-lg font-bold">Serial Number: ' + serialNum + '</p></div>';
-            }
-            if (command === 16450) {
-let             firmwareVersion = readFirmwareFromData(string);
-                //document.getElementById("device_container").innerHTML += '<div class="device-info"><p>Firmware Version: ' + firmwareVersion + '</p></div>';
-                //split the firmware version string with "."
-                let firmwareArray = firmwareVersion.split(".");
-                if (firmwareArray[1] === "6700") {
-                    let modelEarOne = getModelFromSKU("01");
-                    switchViewFromModelID(modelEarOne, "01");
+	if (sppPort) {
+		console.log('connected to a Bluetooth Serial Port Profile port, waiting for id data...', sppPort.getInfo());
+		console.log(sppPort);
+		await sppPort.open({ baudRate: 9600 });
+		//read from the serial port
+		const reader = sppPort.readable.getReader();
+		while (true) {
+			const { value, done } = await reader.read();
+			//console.log(value);
+			//print hex string of the received data
+			var string = "";
+			for (let i = 0; i < value.length; i++) {
+				//fill the string with leading zero if needed
+				string += (value[i] < 16 ? "0" : "") + value[i].toString(16);
+			}
+			if (done) {
+				// Allow the serial port to be closed later.
+				reader.releaseLock();
+				break;
+			}
+			//if received data is 7 bytes long, disconnect
+			if (value.length == 7) {
+				console.log("Received id data: " + string);
+				reader.releaseLock();
+				await sppPort.close();
+				var modelID = string.substring(8, 14).toUpperCase();
+				var modelInfo = getModelFromFastpair(modelID);
+				if (modelInfo) {
+					switchViewFromModelID(modelInfo, modelID);
+				}
+				else {
+                    document.getElementById("scan_button-c").innerText = "Incompatible Device";
                 }
-            }
-
-            if (done) {
-                // Allow the serial port to be closed later.
-                reader.releaseLock();
-                break;
-            }
-            console.log(value);
-        }
-    }
-    setTimeout(function () {
-        window.location.reload();
-    }, 3000);
+				break;
+			}
+		}
+	}
 }
