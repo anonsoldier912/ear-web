@@ -5,6 +5,7 @@ let operationList = {};
 async function switchViewFromModelID(model, sku) {
     localStorage.setItem("model", JSON.stringify(model));
     localStorage.setItem("sku", sku);
+    addToHistory(model, sku);
     if (sku === null || sku === "") {
         document.getElementById("scan_button-c").innerText = "Incompatible Device";
         return;
@@ -345,4 +346,51 @@ async function scanNewDevicesFastpair() {
 			}
 		}
 	}
+}
+
+function addToHistory(model, sku) {
+    if (!model || !sku) return;
+    let history = JSON.parse(localStorage.getItem("ear_web_history") || "[]");
+
+    // Remove if exists to push to top
+    history = history.filter(item => item.sku !== sku);
+
+    // Add new
+    history.unshift({
+        name: model.name,
+        sku: sku,
+        image: model.rightImg, // Use right image as thumbnail
+        base: model.base
+    });
+
+    // Limit to 5
+    if (history.length > 5) history.pop();
+
+    localStorage.setItem("ear_web_history", JSON.stringify(history));
+}
+
+function renderHistory() {
+    const container = document.getElementById("recent_devices");
+    if (!container) return;
+
+    const history = JSON.parse(localStorage.getItem("ear_web_history") || "[]");
+    if (history.length === 0) {
+        container.style.display = "none";
+        return;
+    }
+
+    container.style.display = "block";
+    container.innerHTML = "<div class='text-sm text-gray-400 mb-2'>Recent Devices:</div>";
+
+    history.forEach(device => {
+        const div = document.createElement("div");
+        div.className = "inline-flex items-center bg-[#333] p-2 rounded-lg mr-2 cursor-pointer hover:bg-[#444] transition mb-2";
+        div.onclick = () => scanNewDevicesFastpair(); // We still need to scan due to browser security
+
+        div.innerHTML = `
+            <img src="${device.image}" class="w-8 h-8 mr-2 object-contain">
+            <span class="text-sm">${device.name}</span>
+        `;
+        container.appendChild(div);
+    });
 }

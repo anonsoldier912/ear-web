@@ -133,6 +133,8 @@
         <div id="scan_button-c">Connect</div>
     </div>
 
+    <div id="recent_devices" class="w-60 m-auto text-center mt-5" style="display: none;"></div>
+
     <div class="faq-container">
         <details>
             <summary>Which browsers are supported?</summary>
@@ -186,6 +188,7 @@
 
             if (navigator.serial) {
                 forgetAllDevices();
+                renderHistory();
             } else {
                 alert("This browser does not support Web Serial API. Please use Chrome or Edge or any other Chromium-based browser.");
                 document.getElementById("scan_button-c").innerText = "Unsupported Browser";
